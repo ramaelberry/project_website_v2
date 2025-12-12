@@ -25,7 +25,8 @@ const LoginPopup = ({ setShowLogin }) => {
     setError("");
 
     // 1. Choose the correct URL based on state
-    let newUrl = "http://localhost:3000/api/auth";
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api";
+    let newUrl = `${API_BASE_URL}/auth`;
     if (currState === "Login") {
       newUrl += "/login";
     } else {
