@@ -13,4 +13,7 @@ export default defineConfig({
       transformMixedEsModules: true,
     },
   },
+  ssr: {
+    noExternal: ['@clerk/clerk-react'],
+  },
 })
