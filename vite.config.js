@@ -4,6 +4,9 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    preserveSymlinks: false,
+  },
   optimizeDeps: {
     include: ['@clerk/clerk-react'],
   },
@@ -12,8 +15,5 @@ export default defineConfig({
       include: [/node_modules/],
       transformMixedEsModules: true,
     },
-  },
-  ssr: {
-    noExternal: ['@clerk/clerk-react'],
   },
 })
