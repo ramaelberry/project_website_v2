@@ -3,11 +3,13 @@ import  './Navbar.css'
 import { assets } from '../../assets/assets'
 import { Link } from 'react-router-dom'
 import { StoreContext } from '../../pages/Context/StoreContext'
+import { useUser, UserButton } from '@clerk/clerk-react'
 
 const Navbar = ({setShowLogin}) => {
 
   const [menu,setMenu] = useState("home");
   const {getTotalCartAmount} = useContext(StoreContext);
+  const { isSignedIn } = useUser();
 
   return (
     <div className='navbar'>
@@ -26,7 +28,18 @@ const Navbar = ({setShowLogin}) => {
           <img src={assets.basket_icon} alt="" />
           <div className={getTotalCartAmount()>0?"dot":""}></div>
         </Link>
-        <button onClick={()=>setShowLogin(true)}>sign in</button>
+        {isSignedIn ? (
+          <UserButton afterSignOutUrl="/" />
+        ) : (
+          <div className="navbar-auth-buttons">
+            <Link to="/sign-in">
+              <button>sign in</button>
+            </Link>
+            <Link to="/sign-up">
+              <button>sign up</button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   )
